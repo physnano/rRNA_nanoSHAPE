@@ -5,6 +5,8 @@ Code accompanying "Direct detection of RNA modifications and structure using sin
 
 In vitro nanoSHAPE analysis can be performed on a single target using the commands below. First the multi-fast5 files must be converted to single read fast5 files prior to processing with tombo. Tombo is then used to resquiggle the reads, detect modifications, and generate per-read stats file and optional plot. Comprehensive documentation regarding tombo can be found [here](https://nanoporetech.github.io/tombo/). Finally, the <em>extract_array.py</em> script is used to generate an output numpy array which can be easily processed using python for per-read modification visualization/plotting. 
 
+A general workflow should include sequencing unmodified (native/control) RNA and comparing to the same RNA but modified (with AcIm or other). Both the unmodified and modified reads should be converted to single fast5 files and resquiggled using tombo.  
+
 ## Step 1: convert the multi fast5 files to single fast5 files
 
 	multi_to_single_fast5 -i <directory of multi fast5s> --recursive --save_path <output path> --flowcell <flowcell spec> --kit <kit spec> --fast5_out --cpu_threads_per_Caller <num threads>
@@ -28,7 +30,3 @@ In vitro nanoSHAPE analysis can be performed on a single target using the comman
 ## Step 6: Custom python script for extracting modifications sites as array
 
 	python extract_array.py --fa <FASTA reference file> --f5 <path to single fast5 files to process, either MODIFIED or UNMODIFIED> --out <numpy array out path with extension ".npy"> --rna-name <RNA name from FASTA reference> --sort-reads --current (or --dwell, --stdev)
-
-
-
-
